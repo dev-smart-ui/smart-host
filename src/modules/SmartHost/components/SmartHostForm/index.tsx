@@ -5,8 +5,9 @@ import Economy from "../../../../icons/Economy.svg";
 
 import styles from "./smartHostForm.module.scss";
 import { Button } from "../../../../components/button";
+import { InputBox } from "../InputBox";
 
-interface SmartHostFormProps {
+interface ISmartHostFormProps {
     onPremiumChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     onEconomyChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     economy: number;
@@ -14,19 +15,23 @@ interface SmartHostFormProps {
     onSubmit: () => void;
 }
 
-export const SmartHostForm: React.FC<SmartHostFormProps> = ({onPremiumChange, onEconomyChange, onSubmit, economy, premium}) => {
+export const SmartHostForm: React.FC<ISmartHostFormProps> = ({onPremiumChange, onEconomyChange, onSubmit, economy, premium}) => {
     return <div className={styles.smartHostForm}>
         <div className={styles.inputContainer}>
-            <div className={styles.inputBox}>
-                <img src={Premium} alt="premium" />
-                <label>Premium rooms</label>
-                <input type="text" value={premium} onChange={onPremiumChange} />
-            </div>
-            <div className={styles.inputBox}>
-                <img src={Economy} alt="economy" />
-                <label>Economy rooms</label>
-                <input type="text" value={economy} onChange={onEconomyChange} />
-            </div>
+            <InputBox 
+                iconSvg={Premium}
+                label="Premium rooms"
+                value={premium} 
+                onChange={onPremiumChange} 
+                iconAlt="premium"
+            />
+            <InputBox 
+                iconSvg={Economy}
+                label="Economy rooms"
+                value={economy} 
+                onChange={onEconomyChange}
+                iconAlt="economy"
+            />
         </div>
         
         <Button text="Submit" onClick={onSubmit} />
