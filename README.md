@@ -1,5 +1,5 @@
 ## How to use
 
-Install dependencies: `npm install` or `pnpm install` or `yarn`
+Install dependencies: `npm install`
 
 Run project locally: `npm run dev`

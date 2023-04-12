@@ -24,9 +24,10 @@ export const useCalculateIncome = (premiumCount: number, economyCount: number) =
 
     return {
         onSubmit,
-        premiumIncome: income?.premiumIncome, 
-        economyIncome: income?.economyIncome, 
+        premiumIncome: income?.premiumIncome || 0, 
+        economyIncome: income?.economyIncome || 0, 
         totalIncome: income ? income?.economyIncome + income?.premiumIncome : null,
-        isLoading: loading
+        isLoading: loading,
+        reset: () => setIncome(null)
     };
 };
