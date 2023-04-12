@@ -1,13 +1,14 @@
 import React from "react";
 
-import "./App.css";
+import { MainLayout } from "./modules/layout";
+import { SmartHost } from "./modules/SmartHost";
 
-function App() {
+const App = () => {
     return (
-        <div className="App">
-            Smart Host
-        </div>
+        <MainLayout>
+            <SmartHost />
+        </MainLayout>
     );
-}
+};
 
 export default App;

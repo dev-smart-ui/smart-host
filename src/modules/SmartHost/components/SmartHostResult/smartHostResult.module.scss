@@ -1,0 +1,18 @@
+.smartHostResult {
+    display: flex;
+    align-items: center;
+    gap: 2em;
+
+    .roomsIncome {
+        font-size: 22px;
+        span {
+            font-weight: 600;
+        }
+    }
+
+    .totalIncome {
+        div {
+            font-size: 50px;
+        }
+    }
+}
