@@ -17,8 +17,6 @@ export const SmartHost = () => {
         setRooms(rooms => ({...rooms, economy: +e.target.value.replace(/\D/g, "")}));
     }, []);
 
-    const incomeRevealed = !!totalIncome;
-
     if(isLoading){
         return <div>
             <Loader />
@@ -27,7 +25,7 @@ export const SmartHost = () => {
 
     return (
         <div>
-            {!incomeRevealed && <SmartHostForm
+            {!(totalIncome) && <SmartHostForm
                 onEconomyChange={onEconomyChange}
                 onPremiumChange={onPremiumChange}
                 economy={economy}
@@ -35,7 +33,7 @@ export const SmartHost = () => {
                 onSubmit={onSubmit} 
             />}
 
-            {incomeRevealed && <SmartHostResult 
+            {!!totalIncome && <SmartHostResult 
                 economyIncome={economyIncome} 
                 premiumIncome={premiumIncome} 
                 totalIncome={totalIncome} 

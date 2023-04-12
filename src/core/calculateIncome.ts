@@ -28,7 +28,13 @@ export const calculateIncome = (guestPayments: number[], premiumRoomsCount: numb
     }, {premiumRooms: [] as number[], economyRooms: [] as number[]});
 
     return {
-        economyIncome: economyRooms.reduce((acc, room) => acc + room, 0), 
-        premiumIncome: premiumRooms.reduce((acc, room) => acc + room, 0)
+        economy: {
+            usage: economyRooms.length,
+            income: economyRooms.reduce((acc, room) => acc + room, 0)
+        }, 
+        premium: {
+            usage: premiumRooms.length,
+            income: premiumRooms.reduce((acc, room) => acc + room, 0)
+        }
     };
 };

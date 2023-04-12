@@ -3,7 +3,7 @@ import { calculateIncome } from "../core/calculateIncome";
 import { getGuests } from "../services/getGuests";
 
 export const useCalculateIncome = (premiumCount: number, economyCount: number) => {
-    const [income, setIncome] = useState<null | {economyIncome: number; premiumIncome: number}>(null);
+    const [rooms, setRooms] = useState<null | {economy: {usage: number, income: number}; premium: {usage: number, income: number}}>(null);
     const [loading, setLoading] = useState(false);
 
     const onSubmit = useCallback(async () => {
@@ -14,7 +14,7 @@ export const useCalculateIncome = (premiumCount: number, economyCount: number) =
 
             const income = calculateIncome(guestBudget, premiumCount, economyCount);
 
-            setIncome(income);
+            setRooms(income);
         } catch(err) {
             console.log(err);
         } finally {
@@ -24,10 +24,10 @@ export const useCalculateIncome = (premiumCount: number, economyCount: number) =
 
     return {
         onSubmit,
-        premiumIncome: income?.premiumIncome || 0, 
-        economyIncome: income?.economyIncome || 0, 
-        totalIncome: income ? income?.economyIncome + income?.premiumIncome : null,
+        premiumIncome: rooms?.premium.income || 0, 
+        economyIncome: rooms?.economy.income || 0, 
+        totalIncome: rooms ? rooms?.economy.income + rooms?.premium.income : null,
         isLoading: loading,
-        reset: () => setIncome(null)
+        reset: () => setRooms(null)
     };
 };
