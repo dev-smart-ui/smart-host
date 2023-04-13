@@ -34,6 +34,6 @@ export const SmartHostForm: React.FC<ISmartHostFormProps> = ({onPremiumChange, o
             />
         </div>
         
-        <Button text="Submit" onClick={onSubmit} />
+        <Button text="Submit" disabled={!economy && !premium} onClick={onSubmit} />
     </div>;
 };

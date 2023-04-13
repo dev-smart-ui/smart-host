@@ -3,20 +3,21 @@ import React from "react";
 import styles from "./smartHostResult.module.scss";
 import { Divider } from "../../../../components/divider";
 import { Button } from "../../../../components/button";
+import { RoomHosting } from "../../../../hooks/useCalculateIncome";
 
 interface ISmartHostResultProps {
-    economyIncome: number;
-    premiumIncome: number;
+    economyRooms: RoomHosting;
+    premiumRooms: RoomHosting;
     totalIncome: number;
     reset: () => void;
 }
 
-export const SmartHostResult: React.FC<ISmartHostResultProps> = ({economyIncome, premiumIncome, totalIncome, reset}) => {
+export const SmartHostResult: React.FC<ISmartHostResultProps> = ({economyRooms, premiumRooms, totalIncome, reset}) => {
     return <div className={styles.smartHostResult}>
         <div className={styles.incomeContainer}>
             <div className={styles.roomsIncome}>
-                <div>Premium: <span>{premiumIncome} $</span></div>
-                <div>Economy: <span>{economyIncome} $</span></div>
+                <div>Premium: {premiumRooms.usage}  <span>({premiumRooms.income} $)</span></div>
+                <div>Economy: {economyRooms.usage}  <span>({economyRooms.income} $)</span></div>
             </div>
             <Divider />
             <div className={styles.totalIncome}>

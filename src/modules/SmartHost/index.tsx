@@ -7,7 +7,7 @@ import { Loader } from "../../components/loader";
 
 export const SmartHost = () => {
     const [{premium, economy}, setRooms] = useState({premium: 0, economy: 0});
-    const {onSubmit, totalIncome, economyIncome, premiumIncome, reset, isLoading} = useCalculateIncome(premium, economy);
+    const {onSubmit, totalIncome, economyRooms, premiumRooms, reset, isLoading} = useCalculateIncome(premium, economy);
 
     const onPremiumChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         setRooms(rooms => ({...rooms, premium: +e.target.value.replace(/\D/g, "")}));
@@ -17,6 +17,8 @@ export const SmartHost = () => {
         setRooms(rooms => ({...rooms, economy: +e.target.value.replace(/\D/g, "")}));
     }, []);
 
+    const resultsRevealed = economyRooms && premiumRooms && totalIncome;
+
     if(isLoading){
         return <div>
             <Loader />
@@ -25,7 +27,7 @@ export const SmartHost = () => {
 
     return (
         <div>
-            {!(totalIncome) && <SmartHostForm
+            {!resultsRevealed && <SmartHostForm
                 onEconomyChange={onEconomyChange}
                 onPremiumChange={onPremiumChange}
                 economy={economy}
@@ -33,9 +35,9 @@ export const SmartHost = () => {
                 onSubmit={onSubmit} 
             />}
 
-            {!!totalIncome && <SmartHostResult 
-                economyIncome={economyIncome} 
-                premiumIncome={premiumIncome} 
+            {!!resultsRevealed && <SmartHostResult 
+                economyRooms={economyRooms} 
+                premiumRooms={premiumRooms} 
                 totalIncome={totalIncome} 
                 reset={reset}
             />}

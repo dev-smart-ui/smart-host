@@ -2,8 +2,13 @@ import { useCallback, useState } from "react";
 import { calculateIncome } from "../core/calculateIncome";
 import { getGuests } from "../services/getGuests";
 
+export type RoomHosting = {
+    usage: number, 
+    income: number
+};
+
 export const useCalculateIncome = (premiumCount: number, economyCount: number) => {
-    const [rooms, setRooms] = useState<null | {economy: {usage: number, income: number}; premium: {usage: number, income: number}}>(null);
+    const [rooms, setRooms] = useState<null | {economy: RoomHosting; premium: RoomHosting}>(null);
     const [loading, setLoading] = useState(false);
 
     const onSubmit = useCallback(async () => {
@@ -24,8 +29,8 @@ export const useCalculateIncome = (premiumCount: number, economyCount: number) =
 
     return {
         onSubmit,
-        premiumIncome: rooms?.premium.income || 0, 
-        economyIncome: rooms?.economy.income || 0, 
+        premiumRooms: rooms?.premium, 
+        economyRooms: rooms?.economy, 
         totalIncome: rooms ? rooms?.economy.income + rooms?.premium.income : null,
         isLoading: loading,
         reset: () => setRooms(null)
